@@ -15,8 +15,7 @@ public class MainPlayer : NetworkBehaviour
     public Text namePrefab;
     private Text nameLable;
 
-    public NetworkVariable<NetworkString> PlayerName = new NetworkVariable<NetworkString>();
-
+    public NetworkString networkString = new NetworkString();
     public LoginManager loginManager;
 
     public override void OnNetworkSpawn()
@@ -28,6 +27,7 @@ public class MainPlayer : NetworkBehaviour
         if (IsServer)
         {
             //PlayerName.Value = $"Player {OwnerClientId}";
+            networkString.SetDataCollect($"Player {OwnerClientId}");
         }
         if(IsClient && IsOwner)
         {
@@ -42,18 +42,18 @@ public class MainPlayer : NetworkBehaviour
     [ServerRpc]
     public void UpdateClientNameServerRpc(string name)
     {
-        PlayerName.Value = name;
+        networkString.SetDataCollect(name);
     }
 
     void SetPlayerName()
     {
         Vector3 nameLabelPos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.5f, 0));
-        //nameLable.text = gameObject.name;
+        nameLable.text = networkString.PlayerName;
         nameLable.transform.position = nameLabelPos;
-        if (!string.IsNullOrEmpty(PlayerName.Value))
-        {
-            nameLable.text = PlayerName.Value;
-        }
+        // if (!string.IsNullOrEmpty(PlayerName.Value))
+        // {
+        //     nameLable.text = PlayerName.Value;
+        // }
     }
 
     private void Update()
@@ -92,7 +92,7 @@ public class MainPlayer : NetworkBehaviour
             }
             else
             {
-                rb.angularVelocity = Vector3.zero;
+                // rb.angularVelocity = Vector3.zero;
             }
 
         }

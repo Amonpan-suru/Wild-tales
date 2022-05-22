@@ -9,6 +9,8 @@ public class ScoreScript : NetworkBehaviour
     TMP_Text p1Text;
     TMP_Text p2Text;
     MainPlayer mainPlayer;
+
+    
     public NetworkVariable<int> score = new NetworkVariable<int>(5);
     void Start()
     {
@@ -21,11 +23,11 @@ public class ScoreScript : NetworkBehaviour
     {
         if (IsOwnedByServer)
         {
-            p1Text.text = $"{mainPlayer.PlayerName.Value} : {score.Value}";
+            p1Text.text = $"{mainPlayer.networkString.PlayerName} : {score.Value}";
         }
         else
         {
-            p2Text.text = $"{mainPlayer.PlayerName.Value} : {score.Value}";
+            p2Text.text = $"{mainPlayer.networkString.PlayerName} : {score.Value}";
         }
     }
 

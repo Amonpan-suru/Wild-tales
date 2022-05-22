@@ -3,18 +3,25 @@ using Unity.Netcode;
 
 public struct NetworkString : INetworkSerializable
 {
-    private FixedString32Bytes info;
     public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
     {
-        serializer.SerializeValue(ref info);
+        serializer.SerializeValue(ref PlayerName);
+        serializer.SerializeValue(ref Number);
     }
 
-    public override string ToString()
+    public string PlayerName;
+    public int Number;
+    public NetworkString(string playerName, int number)
     {
-        return info.ToString();
+        PlayerName = playerName;
+        Number = number;
+
     }
 
-    public static implicit operator string(NetworkString s) => s.ToString();
-    public static implicit operator NetworkString(string s) =>
-        new NetworkString() { info = new FixedString32Bytes(s) };
+    public void SetDataCollect(string playerName)
+    {
+        PlayerName = playerName;
+
+    }
+
 }
