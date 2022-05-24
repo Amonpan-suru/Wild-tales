@@ -5,32 +5,69 @@ using Unity.Netcode;
 
 public class PlayerInfo : NetworkBehaviour
 {
-    MainPlayer mainPlayer;
-    public NetworkString networkString;
-    public string playernameinfo;
-    void Start()
+    public ChatManager chatManager ;
+    public string username;
+
+
+    public NetworkString networkString = new NetworkString();
+    public LoginManager loginManager;
+
+    public void Start()
     {
-        mainPlayer = GetComponent<MainPlayer>();
-        networkString = mainPlayer.networkString;
-        
+        NetworkManager.Singleton.OnClientConnectedCallback += playerconnect;
+        if(!IsOwner ) return;   
+        chatManager = FindObjectOfType<ChatManager>();     
+
+        loginManager = GameObject.FindObjectOfType<LoginManager>();
+        if (loginManager != null)
+        {
+            username = loginManager.playerNameInputfield.text;
+            networkString.SetDataCollect(username);
+            chatManager.username = username;
+
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
+
+        }
+       
+              
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        if(IsLocalPlayer)
-        NameInfoServerRpc(mainPlayer.networkString);
-        
+    private void playerconnect(ulong obj){
+        if(IsLocalPlayer){
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
+
+        }
+
     }
 
-    [ServerRpc]
-    void NameInfoServerRpc(NetworkString name){
-        NameInfoClientRpc(name);
+    [ServerRpc(RequireOwnership = false)] 
+    public void UpdateClientNameServerRpc(byte[] name)
+    {   
+        UpdateClientNameClientRpc(name);
     }
-    
+
     [ClientRpc]
-    void NameInfoClientRpc(NetworkString name){
-        playernameinfo = name.PlayerName;
-        this.gameObject.name = name.PlayerName;
+    public void UpdateClientNameClientRpc(byte[] name)
+    {
+        string Approve = System.Text.Encoding.ASCII.GetString(name);
+        username = Approve;
+        this.gameObject.name = username;
+        // Debug.Log("user : " + Approve);
     }
+
+
+    private void Update()
+    {
+        if(!IsLocalPlayer && IsServer){
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
+
+        }
+    } 
 }
+

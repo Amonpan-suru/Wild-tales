@@ -32,16 +32,6 @@ public class ChatManager : NetworkBehaviour
 
     void Update()
     {   
-        // if (!IsLocalPlayer){
-        //   return;  
-        // } 
-
-        // Player = GameObject.FindGameObjectWithTag("Player");
-        // mainPlayer = GetComponent<MainPlayer>();
-        // if(mainPlayer != null){
-        //     if(mainPlayer.NetworkObject != IsLocalPlayer) return;
-        // }
-
         if(chatbox.text != ""){
             if (Input.GetKeyDown(KeyCode.Return)){
                 messageText.SetDataCollect(username +": " + chatbox.text);
@@ -54,12 +44,6 @@ public class ChatManager : NetworkBehaviour
                 chatbox.ActivateInputField();
             }
         }
-
-        // if(!chatbox.isFocused){
-        //     if(Input.GetKeyDown(KeyCode.Space)){
-        //     SendMessageTochatServerRpc("can use this mathon",Message.MessageType.info);
-        //     }
-        // }
     }
 
     [ServerRpc(RequireOwnership = false)]
