@@ -439,7 +439,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1866528064}
   m_HandleRect: {fileID: 1866528063}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1296,7 +1296,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1535855512779568277, guid: 5cecd4c5f041b4a83aa092eab3afcb9f, type: 3}
       propertyPath: m_Name
-      value: ButtonGold (1)
+      value: client
       objectReference: {fileID: 0}
     - target: {fileID: 1535855512779568278, guid: 5cecd4c5f041b4a83aa092eab3afcb9f, type: 3}
       propertyPath: m_Pivot.x
@@ -1867,7 +1867,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &793129765
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2274,11 +2274,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
+  near clip plane: 0.1
+  far clip plane: 5000
+  field of view: 40
   orthographic: 0
-  orthographic size: 5
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -2301,8 +2301,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.09274968, y: -0, z: -0, w: 0.9956895}
-  m_LocalPosition: {x: 0, y: 2.55, z: -10}
+  m_LocalRotation: {x: 0.1833748, y: 0.798327, z: -0.29907006, w: 0.48949432}
+  m_LocalPosition: {x: 3026.7527, y: -345.19638, z: -1635.118}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2802,10 +2802,10 @@ MonoBehaviour:
   NetworkConfig:
     ProtocolVersion: 0
     NetworkTransport: {fileID: 1197322289}
-    PlayerPrefab: {fileID: 434898125132019047, guid: 7757f783037804207bef7e77e9b3f321, type: 3}
+    PlayerPrefab: {fileID: 662782169967012345, guid: 41fc3c5ba558dbb47ba69e7e79875007, type: 3}
     NetworkPrefabs:
     - Override: 0
-      Prefab: {fileID: 434898125132019047, guid: 7757f783037804207bef7e77e9b3f321, type: 3}
+      Prefab: {fileID: 662782169967012345, guid: 41fc3c5ba558dbb47ba69e7e79875007, type: 3}
       SourcePrefabToOverride: {fileID: 8842324717142623577, guid: 910fb943b2bcf43b6ae805f6e4460ce3, type: 3}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
@@ -3770,8 +3770,8 @@ MonoBehaviour:
   textObject: {fileID: 8537582667147062829, guid: e042892eafbe13e48ad59c8188c09e41, type: 3}
   chatboxcanvas: {fileID: 0}
   chatbox: {fileID: 1044731737}
-  playerMessage: {r: 0.043604862, g: 0.9716981, b: 0, a: 1}
-  info: {r: 0.18516374, g: 0.6886792, b: 0.21028751, a: 1}
+  playerMessage: {r: 1, g: 1, b: 1, a: 1}
+  info: {r: 1, g: 1, b: 1, a: 1}
   mainPlayer: {fileID: 0}
   maxMessage: 25
   messagesList: []
