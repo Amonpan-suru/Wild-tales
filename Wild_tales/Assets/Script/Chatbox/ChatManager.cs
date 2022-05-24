@@ -37,10 +37,10 @@ public class ChatManager : NetworkBehaviour
         // } 
 
         // Player = GameObject.FindGameObjectWithTag("Player");
-        mainPlayer = GetComponent<MainPlayer>();
-        if(mainPlayer != null){
-            if(mainPlayer.NetworkObject != IsLocalPlayer) return;
-        }
+        // mainPlayer = GetComponent<MainPlayer>();
+        // if(mainPlayer != null){
+        //     if(mainPlayer.NetworkObject != IsLocalPlayer) return;
+        // }
 
         if(chatbox.text != ""){
             if (Input.GetKeyDown(KeyCode.Return)){

@@ -13,76 +13,72 @@ public class MainPlayer : NetworkBehaviour
     Rigidbody rb;
     // public GameObject chatbox;
 
+    public ChatManager chatManager ;
+    public string username;
 
-    public Text namePrefab;
-    private Text nameLable;
 
     public NetworkString networkString = new NetworkString();
     public LoginManager loginManager;
 
-    public PlayerInfo playerInfo;
-
     public void Start()
     {
-
-        GameObject canvas = GameObject.FindWithTag("MainCanvas");
-        nameLable = Instantiate(namePrefab, Vector3.zero, Quaternion.identity) as Text;
-        nameLable.transform.SetParent(canvas.transform);
+        NetworkManager.Singleton.OnClientConnectedCallback += playerconnect;
+        if(!IsOwner ) return;
+        GameObject canvas = GameObject.FindWithTag("MainCanvas");      
         rb = this.GetComponent<Rigidbody>();
-        playerInfo = GetComponent<PlayerInfo>();
+        chatManager = FindObjectOfType<ChatManager>();     
 
+        loginManager = GameObject.FindObjectOfType<LoginManager>();
+        if (loginManager != null)
+        {
+            username = loginManager.playerNameInputfield.text;
+            networkString.SetDataCollect(username);
+            chatManager.username = username;
 
-        if(IsOwner){
-            
-            loginManager = GameObject.FindObjectOfType<LoginManager>();
-            if (loginManager != null)
-            {
-                networkString.SetDataCollect(loginManager.playerNameInputfield.text);
-                UpdateClientNameServerRpc(networkString);
-            }
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
+
         }
-        else{
-            networkString.SetDataCollect(loginManager.playerNameInputfield.text);
-            return;
+       
+              
+    }
+
+    private void playerconnect(ulong obj){
+        if(IsLocalPlayer){
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
+
         }
-           
-        
+
     }
 
     [ServerRpc(RequireOwnership = false)] 
-    public void UpdateClientNameServerRpc(NetworkString name)
-    {           
-        nameLable.text = name.PlayerName;
+    public void UpdateClientNameServerRpc(byte[] name)
+    {   
         UpdateClientNameClientRpc(name);
     }
 
     [ClientRpc]
-    public void UpdateClientNameClientRpc(NetworkString name)
+    public void UpdateClientNameClientRpc(byte[] name)
     {
-        nameLable.text = name.PlayerName;
+        string Approve = System.Text.Encoding.ASCII.GetString(name);
+        username = Approve;
+        this.gameObject.name = username;
+        Debug.Log("user : " + Approve);
     }
 
-    void SetPlayerName()
-    {
-        Vector3 nameLabelPos = Camera.main.WorldToScreenPoint(transform.position + new Vector3(0, 0.5f, 0));
-        UpdateClientNameServerRpc(networkString);
-        nameLable.transform.position = nameLabelPos;
-       
-    }
 
     private void Update()
     {
-        SetPlayerName();
-  
-    } 
+         if(!IsLocalPlayer && IsServer){
+            System.Text.Encoding.ASCII.GetBytes(username);
+            byte[] user = System.Text.Encoding.ASCII.GetBytes(username);
+            UpdateClientNameServerRpc(user);
 
-    private void OnDestroy()
-    {
-        if(nameLable != null)
-        {
-            Destroy(nameLable.gameObject);
         }
-    }
+    } 
 
     private void FixedUpdate()
     {

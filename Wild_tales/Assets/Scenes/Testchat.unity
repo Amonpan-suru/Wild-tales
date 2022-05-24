@@ -1935,11 +1935,6 @@ MonoBehaviour:
       SourcePrefabToOverride: {fileID: 8842324717142623577, guid: 910fb943b2bcf43b6ae805f6e4460ce3, type: 3}
       SourceHashToOverride: 0
       OverridingTargetPrefab: {fileID: 0}
-    - Override: 0
-      Prefab: {fileID: 8537582667147062829, guid: e042892eafbe13e48ad59c8188c09e41, type: 3}
-      SourcePrefabToOverride: {fileID: 8842324717142623577, guid: 910fb943b2bcf43b6ae805f6e4460ce3, type: 3}
-      SourceHashToOverride: 0
-      OverridingTargetPrefab: {fileID: 0}
     TickRate: 30
     ClientConnectionBufferTimeout: 10
     ConnectionApproval: 1
@@ -2468,8 +2463,6 @@ MonoBehaviour:
   passwordInputfield: {fileID: 1784862485}
   loginUI: {fileID: 793129764}
   leaveButton: {fileID: 1770450607}
-  scorePanel: {fileID: 0}
-  chatbox: {fileID: 1958296644}
 --- !u!4 &1622808931
 Transform:
   m_ObjectHideFlags: 0
@@ -3145,7 +3138,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 214753981
+  GlobalObjectIdHash: 1794032827
   AlwaysReplicateAsRoot: 0
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1

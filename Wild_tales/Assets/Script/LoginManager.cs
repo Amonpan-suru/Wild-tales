@@ -12,9 +12,6 @@ public class LoginManager : MonoBehaviour
     public Text passwordInputfield;
     public GameObject loginUI;
     public GameObject leaveButton;
-    public GameObject scorePanel;
-
-    public GameObject chatbox;
 
     private void Start()
     {
@@ -30,13 +27,11 @@ public class LoginManager : MonoBehaviour
         {
             loginUI.SetActive(false);
             leaveButton.SetActive(true);
-            scorePanel.SetActive(true);
         }
         else
         {
             loginUI.SetActive(true);
             leaveButton.SetActive(false);
-            scorePanel.SetActive(false);
         }
     }
 
@@ -90,7 +85,7 @@ public class LoginManager : MonoBehaviour
     public void Host()
     {
         NetworkManager.Singleton.NetworkConfig.ConnectionData =
-           System.Text.Encoding.ASCII.GetBytes(playerNameInputfield.text + "_" + passwordInputfield.text);
+        System.Text.Encoding.ASCII.GetBytes(playerNameInputfield.text + "_" + passwordInputfield.text);
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
 
