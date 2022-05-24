@@ -5,7 +5,7 @@ using UnityEngine;
 public class UIControls : MonoBehaviour
 {
     public GameObject TabUI;
-    public Animator Tab_Animator;
+    Animator Tab_Animator;
     
     bool tab = false ;
     private void Start()
