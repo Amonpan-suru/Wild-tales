@@ -85,7 +85,7 @@ public class LoginManager : MonoBehaviour
     public void Host()
     {
         NetworkManager.Singleton.NetworkConfig.ConnectionData =
-           System.Text.Encoding.ASCII.GetBytes(playerNameInputfield.text + "_" + passwordInputfield.text);
+        System.Text.Encoding.ASCII.GetBytes(playerNameInputfield.text + "_" + passwordInputfield.text);
         NetworkManager.Singleton.ConnectionApprovalCallback += ApprovalCheck;
         NetworkManager.Singleton.StartHost();
 
