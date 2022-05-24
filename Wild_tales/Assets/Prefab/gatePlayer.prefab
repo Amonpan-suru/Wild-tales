@@ -723,7 +723,6 @@ GameObject:
   - component: {fileID: 4476965353983637193}
   - component: {fileID: 1937672674383444200}
   - component: {fileID: 5200546762426127131}
-  - component: {fileID: 3770656569331446035}
   m_Layer: 0
   m_Name: gatePlayer
   m_TagString: Player
@@ -843,8 +842,10 @@ MonoBehaviour:
     m_InternalValue: {x: 0, y: 0, z: 0}
   speed: 2
   rotationSpeed: 5
+  username: 
   namePrefab: {fileID: 8384207299998859047, guid: e8cc4a8b7994e4782aae4b0d0347215d, type: 3}
   loginManager: {fileID: 0}
+  playerInfo: {fileID: 0}
 --- !u!65 &5200546762426127131
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -858,19 +859,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.06595494, y: 0.20515148, z: 0.12595963}
   m_Center: {x: -0.0009265256, y: 0.10216237, z: -0.009173402}
---- !u!114 &3770656569331446035
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3665940633694051239}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 419b24fb4f187f14bb6d5d113e3b35ec, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  playernameinfo: 
 --- !u!1 &3669543481966518769
 GameObject:
   m_ObjectHideFlags: 0

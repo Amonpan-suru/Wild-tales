@@ -14,6 +14,7 @@ public class MainPlayer : NetworkBehaviour
     // public GameObject chatbox;
 
 
+    public string username;
     public Text namePrefab;
     private Text nameLable;
 
@@ -25,6 +26,7 @@ public class MainPlayer : NetworkBehaviour
     public void Start()
     {
 
+        if(!IsLocalPlayer) return;
         GameObject canvas = GameObject.FindWithTag("MainCanvas");
         nameLable = Instantiate(namePrefab, Vector3.zero, Quaternion.identity) as Text;
         nameLable.transform.SetParent(canvas.transform);
@@ -32,34 +34,28 @@ public class MainPlayer : NetworkBehaviour
         playerInfo = GetComponent<PlayerInfo>();
 
 
-        if(IsOwner){
-            
-            loginManager = GameObject.FindObjectOfType<LoginManager>();
-            if (loginManager != null)
-            {
-                networkString.SetDataCollect(loginManager.playerNameInputfield.text);
-                UpdateClientNameServerRpc(networkString);
-            }
-        }
-        else{
+        loginManager = GameObject.FindObjectOfType<LoginManager>();
+        if (loginManager != null)
+        {
             networkString.SetDataCollect(loginManager.playerNameInputfield.text);
-            return;
+            UpdateClientNameServerRpc(networkString);
+
         }
-           
-        
+       
+              
     }
 
     [ServerRpc(RequireOwnership = false)] 
     public void UpdateClientNameServerRpc(NetworkString name)
     {           
-        nameLable.text = name.PlayerName;
         UpdateClientNameClientRpc(name);
     }
 
     [ClientRpc]
     public void UpdateClientNameClientRpc(NetworkString name)
     {
-        nameLable.text = name.PlayerName;
+        username = name.PlayerName;
+        this.gameObject.name =name.PlayerName;
     }
 
     void SetPlayerName()
@@ -73,16 +69,9 @@ public class MainPlayer : NetworkBehaviour
     private void Update()
     {
         SetPlayerName();
+
   
     } 
-
-    private void OnDestroy()
-    {
-        if(nameLable != null)
-        {
-            Destroy(nameLable.gameObject);
-        }
-    }
 
     private void FixedUpdate()
     {

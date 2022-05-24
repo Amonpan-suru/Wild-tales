@@ -18,19 +18,19 @@ public class PlayerInfo : NetworkBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(IsOwner){
-            NameInfoServerRpc(mainPlayer.networkString);
-        }
-        else {NameInfoClientRpc(mainPlayer.networkString);}
+        if(IsLocalPlayer)
+        NameInfoServerRpc(mainPlayer.networkString);
+        
     }
 
     [ServerRpc]
     void NameInfoServerRpc(NetworkString name){
-        playernameinfo = mainPlayer.networkString.PlayerName;
+        NameInfoClientRpc(name);
     }
     
     [ClientRpc]
     void NameInfoClientRpc(NetworkString name){
-        playernameinfo = mainPlayer.networkString.PlayerName;
+        playernameinfo = name.PlayerName;
+        this.gameObject.name = name.PlayerName;
     }
 }
