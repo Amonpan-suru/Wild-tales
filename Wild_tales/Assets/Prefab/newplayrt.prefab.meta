@@ -1,0 +1,11 @@
+fileFormatVersion: 2
+<<<<<<<< HEAD:Wild_tales/Assets/Prefab/PlayerSpawn.prefab.meta
+guid: adff5b99ffac8a447afb69f30ef79a88
+========
+guid: 398aad09d8b2a47eba664a076763cdcc
+>>>>>>>> film_chatbox:Wild_tales/Assets/Samples/Netcode for GameObjects/1.0.0-pre.9/Bootstrap/Prefabs/BootstrapPlayer.prefab.meta
+PrefabImporter:
+  externalObjects: {}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
