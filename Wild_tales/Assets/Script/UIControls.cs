@@ -19,8 +19,6 @@ public class UIControls : MonoBehaviour
         {
             tab = !tab;
             Tab_Animator.SetBool("isOpen", tab);
-
-            Debug.Log(tab);
         }
     }
 
